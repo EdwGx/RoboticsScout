@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3890BA40BAC7AD6BEB91AA29 /* Pods_RoboticsScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EC3A1236231306EBDE1F2A /* Pods_RoboticsScout.framework */; };
+		968100EA1CC24BB600E9E8C6 /* AERecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968100E91CC24BB600E9E8C6 /* AERecord.framework */; };
+		968100EC1CC24BBC00E9E8C6 /* AECoreDataUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968100EB1CC24BBC00E9E8C6 /* AECoreDataUI.framework */; };
+		968100EE1CC24BC100E9E8C6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968100ED1CC24BC100E9E8C6 /* Alamofire.framework */; };
+		968100F01CC24BD300E9E8C6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968100EF1CC24BD300E9E8C6 /* CoreData.framework */; };
+		968100F31CC24EF500E9E8C6 /* TeamStat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968100F11CC24EF500E9E8C6 /* TeamStat+CoreDataProperties.swift */; };
+		968100F41CC24EF500E9E8C6 /* TeamStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968100F21CC24EF500E9E8C6 /* TeamStat.swift */; };
 		96FE726E1CC1B081000939E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE726D1CC1B081000939E5 /* AppDelegate.swift */; };
 		96FE72701CC1B081000939E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE726F1CC1B081000939E5 /* ViewController.swift */; };
 		96FE72731CC1B083000939E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FE72711CC1B083000939E5 /* Main.storyboard */; };
@@ -19,6 +25,12 @@
 
 /* Begin PBXFileReference section */
 		05805DAB3A21E5E37AC6DBA3 /* Pods-RoboticsScout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoboticsScout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoboticsScout/Pods-RoboticsScout.debug.xcconfig"; sourceTree = "<group>"; };
+		968100E91CC24BB600E9E8C6 /* AERecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AERecord.framework; path = "../../Library/Developer/Xcode/DerivedData/RoboticsScout-gqvpmcyfmojfwnesbezmktszmpla/Build/Products/Debug-iphonesimulator/AERecord/AERecord.framework"; sourceTree = "<group>"; };
+		968100EB1CC24BBC00E9E8C6 /* AECoreDataUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AECoreDataUI.framework; path = "../../Library/Developer/Xcode/DerivedData/RoboticsScout-gqvpmcyfmojfwnesbezmktszmpla/Build/Products/Debug-iphonesimulator/AECoreDataUI/AECoreDataUI.framework"; sourceTree = "<group>"; };
+		968100ED1CC24BC100E9E8C6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/RoboticsScout-gqvpmcyfmojfwnesbezmktszmpla/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		968100EF1CC24BD300E9E8C6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		968100F11CC24EF500E9E8C6 /* TeamStat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TeamStat+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		968100F21CC24EF500E9E8C6 /* TeamStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStat.swift; sourceTree = "<group>"; };
 		96FE726A1CC1B080000939E5 /* RoboticsScout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoboticsScout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FE726D1CC1B081000939E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96FE726F1CC1B081000939E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +49,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				968100F01CC24BD300E9E8C6 /* CoreData.framework in Frameworks */,
+				968100EE1CC24BC100E9E8C6 /* Alamofire.framework in Frameworks */,
+				968100EC1CC24BBC00E9E8C6 /* AECoreDataUI.framework in Frameworks */,
+				968100EA1CC24BB600E9E8C6 /* AERecord.framework in Frameworks */,
 				3890BA40BAC7AD6BEB91AA29 /* Pods_RoboticsScout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +72,10 @@
 		950BD4C0C78F4DD3002F5BE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				968100EF1CC24BD300E9E8C6 /* CoreData.framework */,
+				968100ED1CC24BC100E9E8C6 /* Alamofire.framework */,
+				968100EB1CC24BBC00E9E8C6 /* AECoreDataUI.framework */,
+				968100E91CC24BB600E9E8C6 /* AERecord.framework */,
 				C1EC3A1236231306EBDE1F2A /* Pods_RoboticsScout.framework */,
 			);
 			name = Frameworks;
@@ -90,6 +110,8 @@
 				96FE72791CC1B083000939E5 /* LaunchScreen.storyboard */,
 				96FE727C1CC1B083000939E5 /* Info.plist */,
 				96FE72741CC1B083000939E5 /* RoboticsScout.xcdatamodeld */,
+				968100F11CC24EF500E9E8C6 /* TeamStat+CoreDataProperties.swift */,
+				968100F21CC24EF500E9E8C6 /* TeamStat.swift */,
 			);
 			path = RoboticsScout;
 			sourceTree = "<group>";
@@ -217,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				96FE72701CC1B081000939E5 /* ViewController.swift in Sources */,
+				968100F31CC24EF500E9E8C6 /* TeamStat+CoreDataProperties.swift in Sources */,
+				968100F41CC24EF500E9E8C6 /* TeamStat.swift in Sources */,
 				96FE72851CC1B22F000939E5 /* TeamListViewController.swift in Sources */,
 				96FE72761CC1B083000939E5 /* RoboticsScout.xcdatamodeld in Sources */,
 				96FE726E1CC1B081000939E5 /* AppDelegate.swift in Sources */,
@@ -333,6 +357,7 @@
 			baseConfigurationReference = 05805DAB3A21E5E37AC6DBA3 /* Pods-RoboticsScout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = RoboticsScout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -347,6 +372,7 @@
 			baseConfigurationReference = EE36C0A4048C697830B26DFA /* Pods-RoboticsScout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = RoboticsScout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -13,13 +13,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="3m5-al-eEp">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="UwQ-ww-Vzo" id="e9L-ke-uSo"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zcH-Jj-4f0">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="L2R-Es-wfz" detailTextLabel="1O9-LQ-6Yn" style="IBUITableViewCellStyleSubtitle" id="zcH-Jj-4f0">
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zcH-Jj-4f0" id="ciS-yR-tXK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4659A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L2R-Es-wfz">
+                                            <rect key="frame" x="15" y="5" width="50" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Warrior Robotix A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1O9-LQ-6Yn">
+                                            <rect key="frame" x="15" y="25" width="93" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -31,8 +55,20 @@
                     <navigationItem key="navigationItem" title="Teams" id="hCm-sz-fMl">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="NNk-2j-kfI"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="Uui-RA-a9f" id="uro-jq-khU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gHy-eN-vXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Uui-RA-a9f">
+                    <connections>
+                        <outlet property="delegate" destination="UwQ-ww-Vzo" id="iMD-vC-XV5"/>
+                        <outlet property="searchBar" destination="3m5-al-eEp" id="FLB-tj-scM"/>
+                        <outlet property="searchContentsController" destination="UwQ-ww-Vzo" id="5Qk-eM-AmM"/>
+                        <outlet property="searchResultsDataSource" destination="UwQ-ww-Vzo" id="rJ9-IZ-eZh"/>
+                        <outlet property="searchResultsDelegate" destination="UwQ-ww-Vzo" id="rcQ-cM-dfh"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1477" y="1"/>
         </scene>
