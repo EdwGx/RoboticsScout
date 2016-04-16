@@ -1,0 +1,6 @@
+framework module Pods_RoboticsScout {
+  umbrella header "Pods-RoboticsScout-umbrella.h"
+
+  export *
+  module * { export * }
+}

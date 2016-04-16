@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3890BA40BAC7AD6BEB91AA29 /* Pods_RoboticsScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EC3A1236231306EBDE1F2A /* Pods_RoboticsScout.framework */; };
 		96FE726E1CC1B081000939E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE726D1CC1B081000939E5 /* AppDelegate.swift */; };
 		96FE72701CC1B081000939E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE726F1CC1B081000939E5 /* ViewController.swift */; };
 		96FE72731CC1B083000939E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FE72711CC1B083000939E5 /* Main.storyboard */; };
 		96FE72761CC1B083000939E5 /* RoboticsScout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96FE72741CC1B083000939E5 /* RoboticsScout.xcdatamodeld */; };
 		96FE72781CC1B083000939E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96FE72771CC1B083000939E5 /* Assets.xcassets */; };
 		96FE727B1CC1B083000939E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FE72791CC1B083000939E5 /* LaunchScreen.storyboard */; };
+		96FE72851CC1B22F000939E5 /* TeamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE72841CC1B22F000939E5 /* TeamListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05805DAB3A21E5E37AC6DBA3 /* Pods-RoboticsScout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoboticsScout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoboticsScout/Pods-RoboticsScout.debug.xcconfig"; sourceTree = "<group>"; };
 		96FE726A1CC1B080000939E5 /* RoboticsScout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoboticsScout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FE726D1CC1B081000939E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96FE726F1CC1B081000939E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		96FE72771CC1B083000939E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96FE727A1CC1B083000939E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96FE727C1CC1B083000939E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96FE72841CC1B22F000939E5 /* TeamListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamListViewController.swift; sourceTree = "<group>"; };
+		C1EC3A1236231306EBDE1F2A /* Pods_RoboticsScout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoboticsScout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE36C0A4048C697830B26DFA /* Pods-RoboticsScout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoboticsScout.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoboticsScout/Pods-RoboticsScout.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3890BA40BAC7AD6BEB91AA29 /* Pods_RoboticsScout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46266ACE0678AF9444FF2055 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				05805DAB3A21E5E37AC6DBA3 /* Pods-RoboticsScout.debug.xcconfig */,
+				EE36C0A4048C697830B26DFA /* Pods-RoboticsScout.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		950BD4C0C78F4DD3002F5BE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C1EC3A1236231306EBDE1F2A /* Pods_RoboticsScout.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		96FE72611CC1B07F000939E5 = {
 			isa = PBXGroup;
 			children = (
 				96FE726C1CC1B081000939E5 /* RoboticsScout */,
 				96FE726B1CC1B080000939E5 /* Products */,
+				46266ACE0678AF9444FF2055 /* Pods */,
+				950BD4C0C78F4DD3002F5BE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +85,7 @@
 				96FE726D1CC1B081000939E5 /* AppDelegate.swift */,
 				96FE726F1CC1B081000939E5 /* ViewController.swift */,
 				96FE72711CC1B083000939E5 /* Main.storyboard */,
+				96FE72841CC1B22F000939E5 /* TeamListViewController.swift */,
 				96FE72771CC1B083000939E5 /* Assets.xcassets */,
 				96FE72791CC1B083000939E5 /* LaunchScreen.storyboard */,
 				96FE727C1CC1B083000939E5 /* Info.plist */,
@@ -74,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96FE727F1CC1B083000939E5 /* Build configuration list for PBXNativeTarget "RoboticsScout" */;
 			buildPhases = (
+				C2A9EB8E578836254CB4F190 /* 📦 Check Pods Manifest.lock */,
 				96FE72661CC1B07F000939E5 /* Sources */,
 				96FE72671CC1B07F000939E5 /* Frameworks */,
 				96FE72681CC1B07F000939E5 /* Resources */,
+				FD79B2E1FA83C93C8DA815AD /* 📦 Embed Pods Frameworks */,
+				2DE7C76C8B6CFEC6E18D3D86 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,12 +163,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2DE7C76C8B6CFEC6E18D3D86 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoboticsScout/Pods-RoboticsScout-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2A9EB8E578836254CB4F190 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD79B2E1FA83C93C8DA815AD /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RoboticsScout/Pods-RoboticsScout-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		96FE72661CC1B07F000939E5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				96FE72701CC1B081000939E5 /* ViewController.swift in Sources */,
+				96FE72851CC1B22F000939E5 /* TeamListViewController.swift in Sources */,
 				96FE72761CC1B083000939E5 /* RoboticsScout.xcdatamodeld in Sources */,
 				96FE726E1CC1B081000939E5 /* AppDelegate.swift in Sources */,
 			);
@@ -251,23 +330,29 @@
 		};
 		96FE72801CC1B083000939E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05805DAB3A21E5E37AC6DBA3 /* Pods-RoboticsScout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoboticsScout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.candong.RoboticsScout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		96FE72811CC1B083000939E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE36C0A4048C697830B26DFA /* Pods-RoboticsScout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RoboticsScout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.candong.RoboticsScout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -290,6 +375,7 @@
 				96FE72811CC1B083000939E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

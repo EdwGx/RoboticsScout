@@ -1,0 +1,6 @@
+framework module AECoreDataUI {
+  umbrella header "AECoreDataUI-umbrella.h"
+
+  export *
+  module * { export * }
+}
