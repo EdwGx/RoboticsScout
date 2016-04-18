@@ -2,7 +2,7 @@
 //  TeamStat+CoreDataProperties.swift
 //  RoboticsScout
 //
-//  Created by Edward Guo on 2016-04-16.
+//  Created by Edward Guo on 2016-04-17.
 //  Copyright © 2016 Peiliang Guo. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,15 +14,18 @@ import CoreData
 
 extension TeamStat {
 
-    @NSManaged var number: String
-    @NSManaged var teamName: String
-    @NSManaged var robotScore: NSNumber?
-    @NSManaged var robotRank: NSNumber?
-    @NSManaged var programmingScore: NSNumber?
-    @NSManaged var programmingRank: NSNumber?
-    @NSManaged var country: String?
+    @NSManaged var actualOrder: NSNumber?
     @NSManaged var city: String?
-    @NSManaged var region: String?
+    @NSManaged var country: String?
     @NSManaged var divisionName: String?
+    @NSManaged var identifier: NSNumber?
+    @NSManaged var number: String?
+    @NSManaged var programmingRank: NSNumber?
+    @NSManaged var programmingScore: NSNumber?
+    @NSManaged var region: String?
+    @NSManaged var robotRank: NSNumber?
+    @NSManaged var robotScore: NSNumber?
+    @NSManaged var teamName: String?
+    @NSManaged var scoutingEntries: NSSet?
 
 }

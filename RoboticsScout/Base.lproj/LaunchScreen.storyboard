@@ -16,12 +16,25 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="appLauncherLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TRC-2t-vdt">
+                                <rect key="frame" x="252" y="252" width="96" height="96"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.10196078431372549" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TRC-2t-vdt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KxI-f2-RJF"/>
+                            <constraint firstItem="TRC-2t-vdt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WcJ-Xc-Zgk"/>
+                        </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="appLauncherLogo" width="96" height="96"/>
+    </resources>
 </document>

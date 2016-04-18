@@ -6,4 +6,6 @@ target 'RoboticsScout' do
   pod 'AECoreDataUI'
 
   pod 'Alamofire', '~> 3.3'
+  
+  pod 'Groot'
 end

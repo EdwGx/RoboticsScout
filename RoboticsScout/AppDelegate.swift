@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
         
+        UITabBar.appearance().tintColor = UIColor(red: 1.0, green: 0.67, blue: 0.0, alpha: 1.0)
+        
+        application.setStatusBarHidden(false, withAnimation: .None)
+        
         return true
     }
 
