@@ -267,10 +267,20 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
                     let number = NSNumber(integer: integer)
                     self!.currentScoutingEntry?.setValue(number, forKey: attributeName)
                 }
-                self!.currentScoutingEntry?.setValue(true, forKey: "changed")
-                self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
                 
-                AERecord.saveContext(AERecord.mainContext)
+                do {
+                    try self!.currentScoutingEntry?.validateForUpdate()
+                    self!.currentScoutingEntry?.setValue(true, forKey: "changed")
+                    self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
+                    
+                    AERecord.saveContext(AERecord.mainContext)
+                } catch let validationError as NSError {
+                    let errors = validationError.userInfo[NSLocalizedDescriptionKey]
+                    debugPrint("\(errors)")
+                    
+                } catch {
+                    print("\(error)")
+                }
             })
         }
         alert.addAction(done)
