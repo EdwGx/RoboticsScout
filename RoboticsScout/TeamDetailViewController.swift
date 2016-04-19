@@ -111,7 +111,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
                 cell.detailTextLabel!.text = detailDescription
             } else if indexPath.row == 0 {
                 if currentScoutingEntry!.rating != nil {
-                    detailDescription = String(count: currentScoutingEntry!.rating!.integerValue, repeatedValue: Character("★"))
+                    detailDescription = "\(currentScoutingEntry!.rating!)/10 ★"
                 } else {
                     detailDescription = "N/A"
                 }
