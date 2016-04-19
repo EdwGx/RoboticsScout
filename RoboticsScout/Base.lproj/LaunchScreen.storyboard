@@ -17,8 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="appLauncherLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TRC-2t-vdt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appLauncherLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TRC-2t-vdt">
                                 <rect key="frame" x="252" y="252" width="96" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="coU-c2-sOY"/>
+                                    <constraint firstAttribute="height" constant="96" id="q6H-MY-ZAo"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.10196078431372549" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>

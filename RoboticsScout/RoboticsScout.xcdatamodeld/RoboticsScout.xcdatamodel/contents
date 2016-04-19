@@ -5,12 +5,12 @@
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="ScoutingEntry" representedClassName=".ScoutingEntry" syncable="YES">
-        <attribute name="autonomousFieldPoints" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="autonomousFieldPoints" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="autonomous_field_points"/>
             </userInfo>
         </attribute>
-        <attribute name="autonomousPreloadPoints" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="autonomousPreloadPoints" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="autonomous_preload_points"/>
             </userInfo>
@@ -41,7 +41,7 @@
                 <entry key="JSONKeyPath" value="drive_configuration"/>
             </userInfo>
         </attribute>
-        <attribute name="driveMotors" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="driveMotors" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="drive_motors"/>
             </userInfo>
@@ -66,7 +66,7 @@
                 <entry key="JSONKeyPath" value="drive_stalling"/>
             </userInfo>
         </attribute>
-        <attribute name="driveWheels" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="driveWheels" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="drive_wheels"/>
             </userInfo>
@@ -91,6 +91,16 @@
                 <entry key="JSONKeyPath" value="intake_flip_capacity"/>
             </userInfo>
         </attribute>
+        <attribute name="intakeMotors" optional="YES" attributeType="Integer 64" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="intake_motors"/>
+            </userInfo>
+        </attribute>
+        <attribute name="intakeMotorType" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="intake_motor_type"/>
+            </userInfo>
+        </attribute>
         <attribute name="intakeType" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="intake_type"/>
@@ -106,7 +116,7 @@
                 <entry key="JSONKeyPath" value="lift_elevation"/>
             </userInfo>
         </attribute>
-        <attribute name="liftMotors" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="liftMotors" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="lift_motors"/>
             </userInfo>
@@ -116,11 +126,12 @@
                 <entry key="JSONKeyPath" value="lift_works"/>
             </userInfo>
         </attribute>
-        <attribute name="memberName" attributeType="String" syncable="YES">
+        <attribute name="memberName" attributeType="String" defaultValueString="Unknown" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="member_name"/>
             </userInfo>
         </attribute>
+        <attribute name="newEntry" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="preloadsCapacity" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="preloads_capacity"/>
@@ -137,7 +148,7 @@
                 <entry key="JSONKeyPath" value="shooter_consistency"/>
             </userInfo>
         </attribute>
-        <attribute name="shooterMotors" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="shooterMotors" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="shooter_motors"/>
             </userInfo>
@@ -147,7 +158,7 @@
                 <entry key="JSONKeyPath" value="shooter_range"/>
             </userInfo>
         </attribute>
-        <attribute name="shooterRPM" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="shooterRPM" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="shooterRPM"/>
             </userInfo>
@@ -230,7 +241,7 @@
     </entity>
     <elements>
         <element name="DataUpdate" positionX="178" positionY="-63" width="128" height="75"/>
-        <element name="ScoutingEntry" positionX="171" positionY="72" width="128" height="538"/>
+        <element name="ScoutingEntry" positionX="171" positionY="72" width="128" height="583"/>
         <element name="TeamStat" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

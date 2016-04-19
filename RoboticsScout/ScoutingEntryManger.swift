@@ -9,7 +9,50 @@
 import UIKit
 
 class ScoutingEntryManger: NSObject {
-    var stringAttributes = [
+    
+    var attributes = [
+        "rating",
+        "extraNote",
+        
+        "driveMotors",
+        "driveMotorType",
+        "driveWheels",
+        "driveWheelType",
+        "driveConfiguration",
+        "driveClearance",
+        
+        "shooterType",
+        "shooterMotors",
+        "shooterRPM",
+        
+        "intakeType",
+        "intakeMotors",
+        "intakeMotorType",
+        "intakeFlipCapacity",
+        
+        "lift",
+        "liftMotors",
+        "liftElevation",
+        "liftWorks",
+        
+        "driverConsistency",
+        "driverIntelligence",
+        
+        "preloadsCapacity",
+        
+        "shooterConsistency",
+        "shooterRange",
+        
+        "autonomousStrategy",
+        "autonomousPreloadPoints",
+        "autonomousFieldPoints",
+        "autonomousReliability",
+        
+        "driveStalling",
+        "connectionIssues"
+    ]
+    
+    let attributeOptions: [String:[String]] = [
         "driveMotorType":["Torque", "Turbo", "Speed"],
         "driveWheelType":["Traction", "Omni", "Mecanum"],
         "driveConfiguration":["Regular", "Holonomic", "Tank"],
@@ -26,9 +69,9 @@ class ScoutingEntryManger: NSObject {
         "liftWorks":["Yes", "No"],
         
         "driverConsistency":["Prefect", "Good", "Normal", "Bad"],
-        "driverIntelligence":["Jesus", "Smart", "Okay", "Vidur"],
+        "driverIntelligence":["Jesus", "Smart", "Okay", "Bad"],
         
-        "preloads_capacity":[],
+        "preloadsCapacity":[],
         
         "shooterConsistency":["Prefect", "Good", "Normal", "Bad"],
         "shooterRange":["Long", "Mid", "Close", "Mix"],
@@ -40,5 +83,46 @@ class ScoutingEntryManger: NSObject {
         "connectionIssues":["Yes", "No"]
                             ]
     
+    var displayNames = [
+        "Rating",
+        "Extra Note",
+        
+        "Drive Motors",
+        "Drive Motor Type",
+        "Drive Wheels",
+        "Drive Wheel Type",
+        "Drive Configuration",
+        "Drive Clearance",
+        
+        "Shooter Type",
+        "Shooter Motors",
+        "Shooter RPM",
+        
+        "Intake Type",
+        "Intake Motors",
+        "Intake Motor Type",
+        "Intake Flip Capacity",
+        
+        "Lift",
+        "Lift Motors",
+        "Lift Elevation",
+        "Lift Works",
+        
+        "Driver Consistency",
+        "Driver Intelligence",
+        
+        "Preloads Capacity",
+        
+        "Shooter Consistency",
+        "Shooter Range",
+        
+        "Autonomous Strategy",
+        "Autonomous Preload Points",
+        "Autonomous Field Points",
+        "Autonomous Reliability",
+        
+        "Drive Stalling",
+        "Connection Issues"
+    ]
     
 }

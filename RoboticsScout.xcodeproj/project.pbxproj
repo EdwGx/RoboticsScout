@@ -24,6 +24,7 @@
 		968100F41CC24EF500E9E8C6 /* TeamStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968100F21CC24EF500E9E8C6 /* TeamStat.swift */; };
 		968100F61CC253C500E9E8C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968100F51CC253C500E9E8C6 /* LoginViewController.swift */; };
 		968100F81CC2645900E9E8C6 /* AddTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968100F71CC2645900E9E8C6 /* AddTeamsViewController.swift */; };
+		9681E5F81CC54EB300B8F551 /* ExtraNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9681E5F71CC54EB300B8F551 /* ExtraNoteViewController.swift */; };
 		96FE726E1CC1B081000939E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FE726D1CC1B081000939E5 /* AppDelegate.swift */; };
 		96FE72731CC1B083000939E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FE72711CC1B083000939E5 /* Main.storyboard */; };
 		96FE72761CC1B083000939E5 /* RoboticsScout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96FE72741CC1B083000939E5 /* RoboticsScout.xcdatamodeld */; };
@@ -50,6 +51,7 @@
 		968100F21CC24EF500E9E8C6 /* TeamStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStat.swift; sourceTree = "<group>"; };
 		968100F51CC253C500E9E8C6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		968100F71CC2645900E9E8C6 /* AddTeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamsViewController.swift; sourceTree = "<group>"; };
+		9681E5F71CC54EB300B8F551 /* ExtraNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraNoteViewController.swift; sourceTree = "<group>"; };
 		96FE726A1CC1B080000939E5 /* RoboticsScout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoboticsScout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FE726D1CC1B081000939E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96FE72721CC1B083000939E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				968100F51CC253C500E9E8C6 /* LoginViewController.swift */,
 				967097911CC47988007215E7 /* ScoutingEntryManger.swift */,
 				9673DE281CC2E889003CD0FA /* WarriorServer.swift */,
+				9681E5F71CC54EB300B8F551 /* ExtraNoteViewController.swift */,
 				9673DE2A1CC2F616003CD0FA /* TeamInfoCell.swift */,
 				967097901CC47913007215E7 /* SupportFiles */,
 				9670978F1CC4787F007215E7 /* CoreData */,
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9670978E1CC47838007215E7 /* ScoutingEntry.swift in Sources */,
+				9681E5F81CC54EB300B8F551 /* ExtraNoteViewController.swift in Sources */,
 				967097921CC47988007215E7 /* ScoutingEntryManger.swift in Sources */,
 				968100F61CC253C500E9E8C6 /* LoginViewController.swift in Sources */,
 				968100F81CC2645900E9E8C6 /* AddTeamsViewController.swift in Sources */,

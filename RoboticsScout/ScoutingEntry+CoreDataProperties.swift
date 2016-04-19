@@ -46,6 +46,9 @@ extension ScoutingEntry {
     @NSManaged var changed: NSNumber?
     @NSManaged var memberName: String?
     @NSManaged var selfEntry: NSNumber?
+    @NSManaged var newEntry: NSNumber?
+    @NSManaged var intakeMotors: NSNumber?
+    @NSManaged var intakeMotorType: String?
     @NSManaged var teamStat: TeamStat?
 
 }
