@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import AERecord
 
-class TeamDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelegate {
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var teamLocationLabel: UILabel!
     
@@ -23,42 +23,37 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
     @IBOutlet weak var programmingSkillsRankLabel: UILabel!
     @IBOutlet weak var programmingSkillsScoreLabel: UILabel!
     
-    @IBOutlet weak var extraNoteTextView: UITextView!
-    @IBOutlet weak var extraNoteCell: UITableViewCell!
-    
     var teamStat: TeamStat?
     var currentScoutingEntry: ScoutingEntry?
     var manger = ScoutingEntryManger()
-    var fetchedResultsController: NSFetchedResultsController?
     
     override func viewDidLoad() {
+        manger.delegate = self
         loadDefaultScoutingEntry()
         
         super.viewDidLoad()
         
         refreshData()
         
-        let predicate = ScoutingEntry.createPredicateForAttributes(["teamStat": teamStat!])
-        let request = ScoutingEntry.createFetchRequest(predicate: predicate, sortDescriptors: nil)
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                              managedObjectContext: AERecord.defaultContext,
-                                                              sectionNameKeyPath: nil,
-                                                              cacheName: nil)
-        fetchedResultsController!.delegate = self
-        
-        
-        extraNoteTextView.contentInset = UIEdgeInsets(top: -8, left: -4, bottom: 0, right: 0)
-        
         tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: #selector(self.doRefresh(_:)), forControlEvents: .ValueChanged)
     }
     
     func loadDefaultScoutingEntry() {
-        currentScoutingEntry = ScoutingEntry.firstOrCreateWithAttributes(["teamStat": teamStat!, "selfEntry":true])
+        currentScoutingEntry = ScoutingEntry.firstOrCreateWithAttributes(["teamStat": teamStat!, "selfEntry":true], predicateType: .AndPredicateType, context: AERecord.mainContext)
+        manger.observingScoutingEntry = currentScoutingEntry
+    }
+    
+    func scoutingEntry(scoutingEntry: ScoutingEntry, didChangedValues changedValues: [String : AnyObject]) {
+        var reloadIndexPaths = [NSIndexPath]()
+        for (key, _) in changedValues {
+            if let index = manger.attributes.indexOf(key) {
+                reloadIndexPaths.append(NSIndexPath(forRow: index, inSection: 1))
+            }
+        }
+        tableView.reloadRowsAtIndexPaths(reloadIndexPaths, withRowAnimation: .None)
     }
     
     
@@ -93,8 +88,12 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        if indexPath.section == 1 && currentScoutingEntry!.selfEntry!.boolValue {
-            cell.accessoryType = .DisclosureIndicator
+        if indexPath.section == 1 {
+            if currentScoutingEntry!.selfEntry!.boolValue {
+                cell.accessoryType = .DisclosureIndicator
+            } else {
+                cell.accessoryType = .None
+            }
             
             var detailDescription: String
             
@@ -123,22 +122,10 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
                 } else {
                     detailDescription = ""
                 }
-                extraNoteTextView.text = detailDescription
+                (cell as! ExtraNoteTableViewCell).noteText = detailDescription
             }
         }
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 1 && indexPath.row == 1 {
-            extraNoteCell.layoutIfNeeded()
-            let width = extraNoteCell.contentView.frame.size.width
-            
-            let textViewHeight = extraNoteTextView.sizeThatFits(CGSize(width: width, height: CGFloat.max)).height
-            return (48.0 + textViewHeight)
-        } else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -170,7 +157,11 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+            if indexPath.row == 2 {
+                
+            }
+        } else {
             let attributeName = manger.attributes[indexPath.row]
             if indexPath.row == 1 {
                 performSegueWithIdentifier("editExtraNote", sender: self)
@@ -179,7 +170,70 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
             } else {
                 presentAlertControllerForIndexPath(indexPath, isStringInput: false)
             }
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 1 && indexPath.row == 1 {
+            return UITableViewAutomaticDimension
+        } else {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
+    }
+    
+    func presentActionSheetForShowingAllEntries() {
+        var entryNames = [String]()
+        if let fullName = WarriorServer.remoteFullName() {
+            entryNames.append(fullName)
+        } else {
+            entryNames.append("You")
+        }
+        
+        let sortDescriptor = NSSortDescriptor(key: "member_name", ascending: true)
+        if let entries = ScoutingEntry.allWithAttributes(["teamStat":teamStat!, "selfEntry":false], predicateType: .AndPredicateType, sortDescriptors: [sortDescriptor], context: AERecord.defaultContext) {
+            let names: [String] = entries.map { ($0.valueForKey("memberName")! as! String) }
+            entryNames += names
+        }
+        
+        let alert = UIAlertController(title: "Choose Scouting Entry", message: nil, preferredStyle: .ActionSheet)
+        
+        let handler = {[weak self](action: UIAlertAction) -> Void in
+            guard self != nil else { return }
+            
+            if let title = action.title {
+                let entry: ScoutingEntry?
+                if title == "You" {
+                    entry = ScoutingEntry.firstWithAttributes(["teamStat": self!.teamStat!, "selfEntry": true], predicateType: .AndPredicateType, context: AERecord.mainContext)
+                } else {
+                    entry = ScoutingEntry.firstWithAttributes(["teamStat": self!.teamStat!, "memberName": title], predicateType: .AndPredicateType, context: AERecord.mainContext)
+                }
+                
+                if entry != nil {
+                    self!.reloadScoutingEntry(entry!)
+                }
+            }
+        }
+        
+        for name in entryNames {
+            let action = UIAlertAction(title: name, style: .Default, handler: handler)
+            alert.addAction(action)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    func reloadScoutingEntry(entry: ScoutingEntry) {
+        self.currentScoutingEntry = entry
+        self.manger.observingScoutingEntry = currentScoutingEntry
+        
+        let sections = NSIndexSet(index: 1)
+        self.tableView.reloadSections(sections, withRowAnimation: .None)
+        
     }
     
     func presentAlertControllerForIndexPath(indexPath: NSIndexPath, isStringInput: Bool) {
@@ -200,24 +254,23 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
         }
         
         let done = UIAlertAction(title: "Done", style: .Default) { [weak self, weak alert](action) in
+            let text = alert?.textFields![0].text
+            guard text != nil && !text!.isEmpty else { return }
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                if self != nil && alert != nil {
-                    let text = alert?.textFields![0].text
-                    if text != nil && !text!.isEmpty {
-                        if isStringInput {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self!.currentScoutingEntry?.setValue(text, forKey: attributeName)
-                            })
-                        } else if let integer = Int(text!) {
-                            let number = NSNumber(integer: integer)
-                            self!.currentScoutingEntry?.setValue(number, forKey: attributeName)
-                        }
-                        self!.currentScoutingEntry?.setValue(true, forKey: "changed")
-                        self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
-                        
-                        AERecord.saveContextAndWait()
-                    }
+                guard self != nil else { return }
+                
+                if isStringInput {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self!.currentScoutingEntry?.setValue(text, forKey: attributeName)
+                    })
+                } else if let integer = Int(text!) {
+                    let number = NSNumber(integer: integer)
+                    self!.currentScoutingEntry?.setValue(number, forKey: attributeName)
                 }
+                self!.currentScoutingEntry?.setValue(true, forKey: "changed")
+                self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
+                
+                AERecord.saveContext(AERecord.mainContext)
             })
         }
         alert.addAction(done)
@@ -242,24 +295,17 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
                         self!.currentScoutingEntry?.setValue(true, forKey: "changed")
                         self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
                         
-                        AERecord.saveContextAndWait()
+                        AERecord.saveContext(AERecord.mainContext)
                     })
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                self!.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            })
         }
         for option in displayOptions {
             let action = UIAlertAction(title: option, style: .Default, handler: handler)
             alert.addAction(action)
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self](action) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self!.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            })
-        }
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alert.addAction(cancel)
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -269,5 +315,14 @@ class TeamDetailViewController: UITableViewController, NSFetchedResultsControlle
     func doRefresh(sender: UIRefreshControl) {
         print("Refresh")
         sender.endRefreshing()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        if segue.identifier == "editExtraNote" {
+            let extraNoteVC = segue.destinationViewController as! ExtraNoteViewController
+            extraNoteVC.currentScoutingEntry = self.currentScoutingEntry
+        }
     }
 }

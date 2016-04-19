@@ -17,7 +17,7 @@ class ExtraNoteViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView.text = ""
+        textView.text = currentScoutingEntry!.extraNote
         
         textView.delegate = self
         textView.becomeFirstResponder()
@@ -29,14 +29,19 @@ class ExtraNoteViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(textView: UITextView) {
-        let text = textView.text
+        var text: String = textView.text
+        if text.hasSuffix("\n") {
+            var characters = text.characters
+            characters.removeRange(text.characters.endIndex.predecessor()...text.characters.endIndex.predecessor())
+            text = String(characters)
+        }
         if let entry = currentScoutingEntry {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 entry.extraNote = text
                 entry.changed = true
                 entry.newEntry = false
                 
-                AERecord.saveContextAndWait()
+                AERecord.saveContext(AERecord.mainContext)
             }
         }
     }
@@ -50,7 +55,7 @@ class ExtraNoteViewController: UIViewController, UITextViewDelegate {
         let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let curve = UIViewAnimationCurve(rawValue: (userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue)!
         let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: frame.size.height, right: 0)
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: (frame.size.height - 49), right: 0)
         
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(duration)

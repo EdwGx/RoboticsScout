@@ -160,7 +160,7 @@
         </attribute>
         <attribute name="shooterRPM" optional="YES" attributeType="Integer 64" syncable="YES">
             <userInfo>
-                <entry key="JSONKeyPath" value="shooterRPM"/>
+                <entry key="JSONKeyPath" value="shooter_rpm"/>
             </userInfo>
         </attribute>
         <attribute name="shooterType" optional="YES" attributeType="String" syncable="YES">
@@ -241,7 +241,7 @@
     </entity>
     <elements>
         <element name="DataUpdate" positionX="178" positionY="-63" width="128" height="75"/>
-        <element name="ScoutingEntry" positionX="171" positionY="72" width="128" height="583"/>
+        <element name="ScoutingEntry" positionX="171" positionY="72" width="128" height="585"/>
         <element name="TeamStat" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

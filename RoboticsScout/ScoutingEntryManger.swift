@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import CoreData
+import AERecord
+
+protocol ScoutingEntryMangerDelegate {
+    func scoutingEntry(scoutingEntry: ScoutingEntry, didChangedValues: [String:AnyObject])
+}
 
 class ScoutingEntryManger: NSObject {
     
@@ -62,7 +68,7 @@ class ScoutingEntryManger: NSObject {
         
         "intakeType":["Universal", "Rollers with Flaps"],
         "intakeMotorType":["Fast", "Normal", "Slow"],
-        "intakeFlipCapacity":[],
+        "intakeFlipCapacity":["Yes", "No"],
         
         "lift":["Yes", "No"],
         "liftElevation":["High", "Low"],
@@ -124,5 +130,34 @@ class ScoutingEntryManger: NSObject {
         "Drive Stalling",
         "Connection Issues"
     ]
+    
+    var observingScoutingEntry: ScoutingEntry?
+    var delegate: ScoutingEntryMangerDelegate?
+    
+    override init() {
+        super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.handleContextDidChange(_:)),
+                                                         name: NSManagedObjectContextObjectsDidChangeNotification,
+                                                         object: AERecord.mainContext)
+    }
+    
+    func handleContextDidChange(notification: NSNotification) {
+        if observingScoutingEntry != nil {
+            if let updatedObjects = notification.userInfo![NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+                for object in updatedObjects {
+                    if object.objectID == observingScoutingEntry!.objectID {
+                        self.delegate?.scoutingEntry(self.observingScoutingEntry!, didChangedValues: object.changedValues())
+                    }
+                }
+            }
+        }
+    }
+    
+    deinit {
+      NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     
 }
