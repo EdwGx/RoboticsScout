@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
     <entity name="DataUpdate" representedClassName=".DataUpdate" syncable="YES">
-        <attribute name="lastFetchedAt" attributeType="String" syncable="YES"/>
+        <attribute name="lastFetchedAt" attributeType="String" defaultValueString="2016-01-01 00:00:00 -0500" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="ScoutingEntry" representedClassName=".ScoutingEntry" syncable="YES">
