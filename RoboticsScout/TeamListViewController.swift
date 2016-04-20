@@ -30,10 +30,17 @@ class TeamListViewController: CoreDataTableViewController, UISearchBarDelegate {
                 cell.nameLabel.text = object.teamName
                 
                 cell.divisionName = object.divisionName
-                cell.numberOfEntries = 0
-                cell.hasOwnEntry = false
+                if object.scoutingEntries != nil {
+                    cell.numberOfEntries = object.scoutingEntries!.count
+                } else {
+                    cell.numberOfEntries = 0
+                }
+                
+                cell.hasOwnEntry = object.hasSelfEntry!.boolValue
                 
                 cell.upcomingMatches = []
+                
+                cell.rating = object.averageRating?.floatValue
                 
                 if object.robotScore != nil {
                     cell.robotScoreLabel.text = "\(object.robotScore!)"

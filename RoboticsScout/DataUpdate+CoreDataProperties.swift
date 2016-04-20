@@ -2,7 +2,7 @@
 //  DataUpdate+CoreDataProperties.swift
 //  RoboticsScout
 //
-//  Created by Edward Guo on 2016-04-17.
+//  Created by Edward Guo on 2016-04-20.
 //  Copyright © 2016 Peiliang Guo. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,7 +14,7 @@ import CoreData
 
 extension DataUpdate {
 
-    @NSManaged var name: String?
     @NSManaged var lastFetchedAt: String?
+    @NSManaged var name: String?
 
 }

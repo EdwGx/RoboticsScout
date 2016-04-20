@@ -111,7 +111,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
                 cell.detailTextLabel!.text = detailDescription
             } else if indexPath.row == 0 {
                 if currentScoutingEntry!.rating != nil {
-                    detailDescription = "\(currentScoutingEntry!.rating!)/10 ★"
+                    detailDescription = NSString(format: "%.1f/10 ★", Float(currentScoutingEntry!.rating!.integerValue) / 10.0) as String
                 } else {
                     detailDescription = "N/A"
                 }
@@ -159,7 +159,8 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 2 {
-                
+                presentActionSheetForShowingAllEntries()
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         } else {
             let attributeName = manger.attributes[indexPath.row]
@@ -190,7 +191,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
             entryNames.append("You")
         }
         
-        let sortDescriptor = NSSortDescriptor(key: "member_name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "memberName", ascending: true)
         if let entries = ScoutingEntry.allWithAttributes(["teamStat":teamStat!, "selfEntry":false], predicateType: .AndPredicateType, sortDescriptors: [sortDescriptor], context: AERecord.defaultContext) {
             let names: [String] = entries.map { ($0.valueForKey("memberName")! as! String) }
             entryNames += names
@@ -239,12 +240,30 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
     func presentAlertControllerForIndexPath(indexPath: NSIndexPath, isStringInput: Bool) {
         let attributeName = manger.attributes[indexPath.row]
         let displayName = manger.displayNames[indexPath.row]
+        let currentValue: String?
+        
+        switch self.currentScoutingEntry?.valueForKey(attributeName) {
+        case let string as String:
+            currentValue = string
+        case let number as NSNumber:
+            if attributeName == "rating" {
+                currentValue = NSString(format: "%.1f", number.integerValue/10) as String
+            } else {
+                currentValue = "\(number.integerValue)"
+            }
+        default:
+            currentValue = nil
+        }
         
         let alert = UIAlertController(title: displayName, message: nil, preferredStyle: .Alert)
         
         alert.addTextFieldWithConfigurationHandler { (field) in
+            field.text = currentValue
+            
             field.autocorrectionType = .No
             field.autocapitalizationType = .None
+            field.returnKeyType = .Done
+            field.clearButtonMode = .Always
             
             if isStringInput {
                 field.keyboardType = .Default
@@ -263,15 +282,27 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
                     dispatch_async(dispatch_get_main_queue(), {
                         self!.currentScoutingEntry?.setValue(text, forKey: attributeName)
                     })
+                } else if attributeName == "rating" {
+                    if var floatValue = Float(text!) {
+                        floatValue = floatValue * 10.0
+                        self!.currentScoutingEntry?.rating = NSNumber(integer: min(100, max(0, Int(floatValue))))
+                        self!.currentScoutingEntry?.teamStat?.updateAverageRating()
+                    }
+                    
                 } else if let integer = Int(text!) {
                     let number = NSNumber(integer: integer)
+                    
                     self!.currentScoutingEntry?.setValue(number, forKey: attributeName)
+                    
                 }
                 
                 do {
                     try self!.currentScoutingEntry?.validateForUpdate()
                     self!.currentScoutingEntry?.setValue(true, forKey: "changed")
-                    self!.currentScoutingEntry?.setValue(false, forKey: "newEntry")
+                    if self!.currentScoutingEntry!.newEntry!.boolValue {
+                        self!.currentScoutingEntry!.setValue(false, forKey: "newEntry")
+                        self!.currentScoutingEntry!.teamStat?.hasSelfEntry = true
+                    }
                     
                     AERecord.saveContext(AERecord.mainContext)
                 } catch let validationError as NSError {
@@ -284,6 +315,9 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
             })
         }
         alert.addAction(done)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alert.addAction(cancel)
         
         self.presentViewController(alert, animated: true, completion: nil)
     }

@@ -22,10 +22,14 @@ class TeamInfoCell: UITableViewCell {
     var numberOfEntries: Int = 0 { didSet { updateDescriptionLabel() } }
     var hasOwnEntry: Bool = false { didSet { updateDescriptionLabel() } }
     
-    var rating: Int = 0 {
+    var rating: Float? = nil {
         didSet {
-            let stars = Int(round((Double(rating)/100.0) * 5.0))
-            ratingLabel.text = String(count: stars, repeatedValue: Character("★"))
+            if rating != nil {
+                ratingLabel.text = NSString(format: "%.1f/10 ★", rating!) as String
+            } else {
+                ratingLabel.text = "Not Rated"
+            }
+            
         }
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import AERecord
 
 class TeamStat: NSManagedObject {
 
@@ -24,6 +24,24 @@ class TeamStat: NSManagedObject {
             } else {
                 return "N/A"
             }
+        }
+    }
+    
+    func updateAverageRating() {
+        guard self.scoutingEntries != nil else { return }
+        var sum: Float = 0.0
+        var count = 0
+        for entry in self.scoutingEntries! {
+            if let rating = entry.valueForKey("rating") as? NSNumber {
+                let ratingInt = rating.integerValue
+                sum += Float(ratingInt) / 10.0
+                count += 1
+            }
+        }
+        if sum > 0 {
+            self.averageRating = NSNumber(float: Float(sum) / Float(count))
+        } else {
+            self.averageRating = nil
         }
     }
 

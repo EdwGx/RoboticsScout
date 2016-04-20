@@ -125,9 +125,99 @@ class WarriorServer {
                     AERecord.saveContextAndWait()
                 }
                 
-                syncCompleted(succeed && lastSuccess, completion: completion)
+                syncUploadingScoutingEntries(lastSuccess && succeed, completion: completion)
             })
             
+        }
+    }
+    
+    static func syncUploadingScoutingEntries(lastSuccess: Bool, completion: (success: Bool) -> Void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            if let changedEntries = ScoutingEntry.allWithAttributes(["selfEntry":true, "changed":true]) {
+                var entriesJSON = [[String:AnyObject]]()
+                
+                for object in changedEntries {
+                    let entry = object as! ScoutingEntry
+                    entry.changed = NSNumber(bool: false)
+                    
+                    var dictionary = JSONDictionaryFromObject(entry)
+                    if entry.teamStat!.identifier != nil {
+                        dictionary["team_stat_id"] = entry.teamStat!.identifier
+                    } else if entry.teamStat!.number != nil {
+                        dictionary["team_stat_number"] = entry.teamStat!.number
+                    }
+                    entriesJSON.append(dictionary)
+                }
+                
+                AERecord.saveContextAndWait(AERecord.defaultContext)
+
+                var params = WarriorServer.basicParams()
+                params["scouting_entries"] = entriesJSON
+                
+                Alamofire.request(.POST, "https://4659warriors.com/scouting_entries/mass.json", parameters: params, encoding: .JSON, headers: ["Content-Type":"application/json"]).responseJSON(completionHandler: { (response) in
+                    
+                    var succeed = false
+                    if response.response != nil {
+                        if response.response!.statusCode == 200 {
+                            succeed = response.result.isSuccess
+                        }
+                    }
+                    
+                    if succeed {
+                        succeed = response.result.value!["success"] as! Bool
+                    }
+                    syncDownloadingScoutingEntries(lastSuccess && succeed, completion: completion)
+                })
+            
+                
+            } else {
+                syncDownloadingScoutingEntries(false, completion: completion)
+            }
+            
+        }
+    }
+    
+    static func syncDownloadingScoutingEntries(lastSuccess: Bool, completion: (success: Bool) -> Void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            var params = WarriorServer.basicParams()
+            
+            if let lastFetchedTeam = WarriorServer.lastFetched("ScoutingEntries") {
+                params["after"] = lastFetchedTeam
+            }
+            
+            Alamofire.request(.GET, "https://4659warriors.com/scouting_entries.json", parameters: params).responseJSON(completionHandler: { (response) in
+                
+                var succeed = false
+                if response.response != nil {
+                    if response.response!.statusCode == 200 {
+                        succeed = response.result.isSuccess
+                    }
+                }
+                
+                if succeed {
+                    let scoutingEntryJSON = response.result.value as! [[String:AnyObject]]
+                    
+                    if scoutingEntryJSON.count > 0 {
+                        let first = scoutingEntryJSON[0]
+                        setLastFetched("ScoutingEntries", timestamp: first["fetchedAt"] as? String)
+                    }
+                    
+                    for entry in scoutingEntryJSON {
+                        do {
+                            let scoutingEntry = try GRTJSONSerialization.objectWithEntityName("ScoutingEntry", fromJSONDictionary: entry, inContext: AERecord.defaultContext) as! ScoutingEntry
+                            scoutingEntry.teamStat?.updateAverageRating()
+                        } catch {
+                            succeed = false
+                            print("\(error)")
+                        }
+                    }
+                    
+                    AERecord.saveContextAndWait(AERecord.defaultContext)
+                }
+                
+                syncCompleted(lastSuccess && succeed, completion: completion)
+            })
+
         }
     }
     

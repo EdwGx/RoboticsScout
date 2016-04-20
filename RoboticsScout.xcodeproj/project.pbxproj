@@ -106,12 +106,12 @@
 		9670978F1CC4787F007215E7 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9615C46C1CC431C1001F2B43 /* TeamStat+CoreDataProperties.swift */,
-				9670978B1CC47838007215E7 /* ScoutingEntry+CoreDataProperties.swift */,
 				9670978C1CC47838007215E7 /* ScoutingEntry.swift */,
-				9615C46E1CC43A46001F2B43 /* DataUpdate+CoreDataProperties.swift */,
+				9670978B1CC47838007215E7 /* ScoutingEntry+CoreDataProperties.swift */,
 				9615C46F1CC43A46001F2B43 /* DataUpdate.swift */,
+				9615C46E1CC43A46001F2B43 /* DataUpdate+CoreDataProperties.swift */,
 				968100F21CC24EF500E9E8C6 /* TeamStat.swift */,
+				9615C46C1CC431C1001F2B43 /* TeamStat+CoreDataProperties.swift */,
 				96FE72741CC1B083000939E5 /* RoboticsScout.xcdatamodeld */,
 			);
 			name = CoreData;

@@ -5,12 +5,12 @@
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="ScoutingEntry" representedClassName=".ScoutingEntry" syncable="YES">
-        <attribute name="autonomousFieldPoints" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="autonomousFieldPoints" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="autonomous_field_points"/>
             </userInfo>
         </attribute>
-        <attribute name="autonomousPreloadPoints" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="autonomousPreloadPoints" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="autonomous_preload_points"/>
             </userInfo>
@@ -41,7 +41,7 @@
                 <entry key="JSONKeyPath" value="drive_configuration"/>
             </userInfo>
         </attribute>
-        <attribute name="driveMotors" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="driveMotors" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="drive_motors"/>
             </userInfo>
@@ -66,7 +66,7 @@
                 <entry key="JSONKeyPath" value="drive_stalling"/>
             </userInfo>
         </attribute>
-        <attribute name="driveWheels" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="driveWheels" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="drive_wheels"/>
             </userInfo>
@@ -81,7 +81,7 @@
                 <entry key="JSONKeyPath" value="extra_note"/>
             </userInfo>
         </attribute>
-        <attribute name="identifier" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -91,7 +91,7 @@
                 <entry key="JSONKeyPath" value="intake_flip_capacity"/>
             </userInfo>
         </attribute>
-        <attribute name="intakeMotors" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="intakeMotors" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="intake_motors"/>
             </userInfo>
@@ -116,7 +116,7 @@
                 <entry key="JSONKeyPath" value="lift_elevation"/>
             </userInfo>
         </attribute>
-        <attribute name="liftMotors" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="liftMotors" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="lift_motors"/>
             </userInfo>
@@ -137,7 +137,7 @@
                 <entry key="JSONKeyPath" value="preloads_capacity"/>
             </userInfo>
         </attribute>
-        <attribute name="rating" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="10" syncable="YES">
+        <attribute name="rating" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="100" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="rating"/>
             </userInfo>
@@ -148,7 +148,7 @@
                 <entry key="JSONKeyPath" value="shooter_consistency"/>
             </userInfo>
         </attribute>
-        <attribute name="shooterMotors" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="shooterMotors" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="shooter_motors"/>
             </userInfo>
@@ -158,7 +158,7 @@
                 <entry key="JSONKeyPath" value="shooter_range"/>
             </userInfo>
         </attribute>
-        <attribute name="shooterRPM" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="shooterRPM" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="shooter_rpm"/>
             </userInfo>
@@ -168,17 +168,22 @@
                 <entry key="JSONKeyPath" value="shooter_type"/>
             </userInfo>
         </attribute>
-        <relationship name="teamStat" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStat" inverseName="scoutingEntries" inverseEntity="TeamStat" syncable="YES"/>
+        <relationship name="teamStat" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStat" inverseName="scoutingEntries" inverseEntity="TeamStat" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="team_stat"/>
+            </userInfo>
+        </relationship>
         <userInfo>
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
     <entity name="TeamStat" representedClassName=".TeamStat" syncable="YES">
-        <attribute name="actualOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES">
+        <attribute name="actualOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="actual_order"/>
             </userInfo>
         </attribute>
+        <attribute name="averageRating" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="city"/>
@@ -194,7 +199,8 @@
                 <entry key="JSONKeyPath" value="division_name"/>
             </userInfo>
         </attribute>
-        <attribute name="identifier" optional="YES" attributeType="Integer 64" syncable="YES">
+        <attribute name="hasSelfEntry" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -204,12 +210,12 @@
                 <entry key="JSONKeyPath" value="number"/>
             </userInfo>
         </attribute>
-        <attribute name="programmingRank" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="programmingRank" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="programming_rank"/>
             </userInfo>
         </attribute>
-        <attribute name="programmingScore" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="programmingScore" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="programming_score"/>
             </userInfo>
@@ -219,12 +225,12 @@
                 <entry key="JSONKeyPath" value="region"/>
             </userInfo>
         </attribute>
-        <attribute name="robotRank" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="robotRank" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="robot_rank"/>
             </userInfo>
         </attribute>
-        <attribute name="robotScore" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="robotScore" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="robot_score"/>
             </userInfo>
@@ -234,7 +240,11 @@
                 <entry key="JSONKeyPath" value="team_name"/>
             </userInfo>
         </attribute>
-        <relationship name="scoutingEntries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ScoutingEntry" inverseName="teamStat" inverseEntity="ScoutingEntry" syncable="YES"/>
+        <relationship name="scoutingEntries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ScoutingEntry" inverseName="teamStat" inverseEntity="ScoutingEntry" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="scouting_entries"/>
+            </userInfo>
+        </relationship>
         <userInfo>
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
@@ -242,6 +252,6 @@
     <elements>
         <element name="DataUpdate" positionX="178" positionY="-63" width="128" height="75"/>
         <element name="ScoutingEntry" positionX="171" positionY="72" width="128" height="585"/>
-        <element name="TeamStat" positionX="-63" positionY="-18" width="128" height="240"/>
+        <element name="TeamStat" positionX="-63" positionY="-18" width="128" height="270"/>
     </elements>
 </model>
