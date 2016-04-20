@@ -57,9 +57,9 @@ class TeamInfoCell: UITableViewCell {
         }
         
         if hasOwnEntry {
-            description += "✓ - "
+            description += "Y - "
         } else {
-            description += "𐄂 - "
+            description += "N - "
         }
         
         if divisionName != nil {

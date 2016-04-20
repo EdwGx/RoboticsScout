@@ -51,16 +51,29 @@
                             <constraint firstItem="bNq-9T-rex" firstAttribute="centerX" secondItem="ZLN-J7-0wZ" secondAttribute="centerX" id="9B1-cm-uSk"/>
                             <constraint firstAttribute="trailing" secondItem="bNq-9T-rex" secondAttribute="trailing" id="AYb-pz-54i"/>
                             <constraint firstItem="ZLN-J7-0wZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i6C-cJ-dcU" secondAttribute="leadingMargin" constant="5" id="EKv-OO-kKQ"/>
+                            <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ZLN-J7-0wZ" secondAttribute="bottom" constant="160" id="EhK-GP-nb4"/>
                             <constraint firstItem="yss-vX-QNg" firstAttribute="top" secondItem="ZLN-J7-0wZ" secondAttribute="bottom" constant="22" id="MsT-9Y-12H"/>
                             <constraint firstItem="dBO-Or-KaZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yss-vX-QNg" secondAttribute="bottom" constant="230" id="N4V-0D-OwM"/>
                             <constraint firstItem="ZLN-J7-0wZ" firstAttribute="centerX" secondItem="yss-vX-QNg" secondAttribute="centerX" id="REN-aa-PgI"/>
                             <constraint firstItem="bNq-9T-rex" firstAttribute="leading" secondItem="i6C-cJ-dcU" secondAttribute="leading" id="Ugi-0i-FQu"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ZLN-J7-0wZ" secondAttribute="trailing" constant="5" id="cDs-f0-hoa"/>
                             <constraint firstItem="bNq-9T-rex" firstAttribute="top" secondItem="dr4-dE-UX5" secondAttribute="bottom" id="ql3-7f-mLW"/>
-                            <constraint firstItem="ZLN-J7-0wZ" firstAttribute="top" secondItem="bNq-9T-rex" secondAttribute="bottom" constant="20" id="sVq-Ve-FwG"/>
+                            <constraint firstItem="ZLN-J7-0wZ" firstAttribute="top" secondItem="bNq-9T-rex" secondAttribute="bottom" id="sVq-Ve-FwG"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="EhK-GP-nb4"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="EhK-GP-nb4"/>
+                                <exclude reference="N4V-0D-OwM"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="yss-vX-QNg" id="gHW-Z3-9bb"/>
                         <outlet property="pickerView" destination="bNq-9T-rex" id="uSc-eM-nOj"/>
                         <outlet property="teamNumberField" destination="ZLN-J7-0wZ" id="hIp-zV-08c"/>
                         <segue destination="fKg-66-fWo" kind="unwind" identifier="finishAddTeam" unwindAction="unwindTeamList:" id="31z-V3-6qY"/>
@@ -96,20 +109,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4659A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpD-qQ-pWT">
-                                            <rect key="frame" x="16" y="8" width="411" height="26"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="26" id="Hut-jN-zIq"/>
-                                            </constraints>
+                                            <rect key="frame" x="16" y="8" width="411" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" text="Warrior Robotix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xea-ZE-YJy">
-                                            <rect key="frame" x="16" y="35" width="88" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="UaK-56-4vb"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -197,6 +198,12 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="700" text="Warrior Robotix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xea-ZE-YJy">
+                                            <rect key="frame" x="16" y="30" width="88" height="26"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

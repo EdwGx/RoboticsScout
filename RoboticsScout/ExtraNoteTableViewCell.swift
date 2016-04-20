@@ -37,6 +37,7 @@ class ExtraNoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        noteLabel.translatesAutoresizingMaskIntoConstraints = false
         
         titleConstrain = NSLayoutConstraint(item: self.contentView, attribute: .BottomMargin, relatedBy: .Equal, toItem: titleLabel, attribute: .Bottom, multiplier: 1.0, constant: 3.0)
         titleConstrain!.identifier = "titleBottom"

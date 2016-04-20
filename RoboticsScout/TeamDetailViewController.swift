@@ -261,7 +261,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
             field.text = currentValue
             
             field.autocorrectionType = .No
-            field.autocapitalizationType = .None
+            field.autocapitalizationType = .Words
             field.returnKeyType = .Done
             field.clearButtonMode = .Always
             
@@ -328,6 +328,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         let displayOptions = options + ["Other"]
         
         let alert = UIAlertController(title: displayName, message: nil, preferredStyle: .ActionSheet)
+        alert.popoverPresentationController
         
         let handler = {[weak self](action: UIAlertAction) -> Void in
             if let title = action.title {
@@ -351,6 +352,9 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alert.addAction(cancel)
+        
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = self.view.bounds
         
         self.presentViewController(alert, animated: true, completion: nil)
         

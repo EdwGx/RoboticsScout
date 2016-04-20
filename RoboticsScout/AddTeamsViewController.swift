@@ -14,9 +14,20 @@ import Groot
 class AddTeamsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var pickerView : UIPickerView!
     @IBOutlet weak var teamNumberField: UITextField!
+    @IBOutlet weak var addButton: UIButton!
     
     let optionList = ["Team Number", "Science", "Technology", "Engineering", "Arts", "Math"]
-    var requesting = false
+    var requesting = false {
+        didSet {
+            dispatch_async(dispatch_get_main_queue(), {
+                if self.requesting {
+                    self.addButton.enabled = false
+                } else {
+                    self.addButton.enabled = true
+                }
+            })
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,10 +102,9 @@ class AddTeamsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                     let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
                     alert.addAction(dismiss)
                     self.presentViewController(alert, animated: true, completion: nil)
+                    self.requesting = false
                 })
             }
-            
-            self.requesting = false
         }
         
     }
@@ -154,13 +164,14 @@ class AddTeamsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //            }
 //        }
         do {
-            try GRTJSONSerialization.objectsWithEntityName("TeamStat", fromJSONArray: teams, inContext: AERecord.defaultContext)
-            AERecord.saveContext()
+            try GRTJSONSerialization.objectsWithEntityName("TeamStat", fromJSONArray: teams, inContext: AERecord.mainContext)
+            AERecord.saveContextAndWait(AERecord.mainContext)
         } catch {
             print("\(error)")
         }
         
         dispatch_async(dispatch_get_main_queue(), {
+            self.requesting = false
             self.performSegueWithIdentifier("finishAddTeam", sender: self)
         })
         
