@@ -55,9 +55,10 @@ class TeamListViewController: CoreDataTableViewController, UISearchBarDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if let frc = fetchedResultsController {
             if let object = frc.objectAtIndexPath(indexPath) as? TeamStat {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                
                 selectedTeamStat = object
                 performSegueWithIdentifier("showTeam", sender: self)
             }

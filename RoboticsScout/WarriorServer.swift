@@ -165,6 +165,15 @@ class WarriorServer {
                     
                     if succeed {
                         succeed = response.result.value!["success"] as! Bool
+                        if let scoutingEntryIds = response.result.value!["scouting_entry_ids"] as? [AnyObject] {
+                            for i in 0..<scoutingEntryIds.count {
+                                if let entryId = scoutingEntryIds[i] as? Int {
+                                    changedEntries[i].setValue(NSNumber(integer: entryId), forKey: "identifier")
+                                }
+                            }
+                            
+                            AERecord.saveContextAndWait(AERecord.defaultContext)
+                        }
                     }
                     syncDownloadingScoutingEntries(lastSuccess && succeed, completion: completion)
                 })
@@ -193,7 +202,7 @@ class WarriorServer {
                         succeed = response.result.isSuccess
                     }
                 }
-                
+
                 if succeed {
                     let scoutingEntryJSON = response.result.value as! [[String:AnyObject]]
                     
@@ -202,10 +211,18 @@ class WarriorServer {
                         setLastFetched("ScoutingEntries", timestamp: first["fetchedAt"] as? String)
                     }
                     
-                    for entry in scoutingEntryJSON {
+                    for var entryJSON in scoutingEntryJSON {
                         do {
-                            let scoutingEntry = try GRTJSONSerialization.objectWithEntityName("ScoutingEntry", fromJSONDictionary: entry, inContext: AERecord.defaultContext) as! ScoutingEntry
-                            scoutingEntry.teamStat?.updateAverageRating()
+                            let teamStatJSON = entryJSON["team_stat"] as! [String:AnyObject]
+                            
+                            let identifier = NSNumber(integer: (teamStatJSON["id"] as! Int) )
+                            
+                            if let teamStat = TeamStat.firstWithAttribute("identifier", value: identifier) as? TeamStat {
+                                let scoutingEntry = try GRTJSONSerialization.objectWithEntityName("ScoutingEntry", fromJSONDictionary: entryJSON, inContext: AERecord.defaultContext) as! ScoutingEntry
+                                scoutingEntry.teamStat = teamStat
+                                
+                                scoutingEntry.teamStat!.updateAverageRating()
+                            }
                         } catch {
                             succeed = false
                             print("\(error)")

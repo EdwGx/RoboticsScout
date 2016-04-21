@@ -19,6 +19,7 @@ extension TeamStat {
     @NSManaged var city: String?
     @NSManaged var country: String?
     @NSManaged var divisionName: String?
+    @NSManaged var hasSelfEntry: NSNumber?
     @NSManaged var identifier: NSNumber?
     @NSManaged var number: String?
     @NSManaged var programmingRank: NSNumber?
@@ -27,7 +28,6 @@ extension TeamStat {
     @NSManaged var robotRank: NSNumber?
     @NSManaged var robotScore: NSNumber?
     @NSManaged var teamName: String?
-    @NSManaged var hasSelfEntry: NSNumber?
     @NSManaged var scoutingEntries: NSSet?
 
 }

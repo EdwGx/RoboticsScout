@@ -157,6 +157,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if indexPath.section == 0 {
             if indexPath.row == 2 {
                 presentActionSheetForShowingAllEntries()
@@ -198,6 +199,12 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         }
         
         let alert = UIAlertController(title: "Choose Scouting Entry", message: nil, preferredStyle: .ActionSheet)
+        
+        let rect = self.tableView.convertRect(self.tableView.rectForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)), toView: self.tableView)
+        
+        alert.popoverPresentationController?.sourceRect = rect
+        alert.popoverPresentationController?.sourceView = self.tableView
+        alert.popoverPresentationController?.permittedArrowDirections = [.Up, .Down]
         
         let handler = {[weak self](action: UIAlertAction) -> Void in
             guard self != nil else { return }
@@ -247,7 +254,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
             currentValue = string
         case let number as NSNumber:
             if attributeName == "rating" {
-                currentValue = NSString(format: "%.1f", number.integerValue/10) as String
+                currentValue = NSString(format: "%.1f", Float(number.integerValue)/10.0) as String
             } else {
                 currentValue = "\(number.integerValue)"
             }
@@ -256,7 +263,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         }
         
         let alert = UIAlertController(title: displayName, message: nil, preferredStyle: .Alert)
-        
+            
         alert.addTextFieldWithConfigurationHandler { (field) in
             field.text = currentValue
             
@@ -301,7 +308,7 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
                     self!.currentScoutingEntry?.setValue(true, forKey: "changed")
                     if self!.currentScoutingEntry!.newEntry!.boolValue {
                         self!.currentScoutingEntry!.setValue(false, forKey: "newEntry")
-                        self!.currentScoutingEntry!.teamStat?.hasSelfEntry = true
+                        self!.currentScoutingEntry!.teamStat?.hasSelfEntry = NSNumber(bool: true)
                     }
                     
                     AERecord.saveContext(AERecord.mainContext)
@@ -325,10 +332,21 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
     func presentAlertSheetForIndexPath(indexPath: NSIndexPath, options: [String]) {
         let attributeName = manger.attributes[indexPath.row]
         let displayName = manger.displayNames[indexPath.row]
-        let displayOptions = options + ["Other"]
+        let displayOptions: [String]
+        if var currentValue = self.currentScoutingEntry!.valueForKey(attributeName) as? String {
+            currentValue = "● \(currentValue)"
+            displayOptions = [currentValue] + options + ["Other"]
+        } else {
+            displayOptions = options + ["Other"]
+        }
         
         let alert = UIAlertController(title: displayName, message: nil, preferredStyle: .ActionSheet)
-        alert.popoverPresentationController
+        
+        let rect = self.tableView.convertRect(self.tableView.rectForRowAtIndexPath(indexPath), toView: self.tableView)
+        
+        alert.popoverPresentationController?.sourceRect = rect
+        alert.popoverPresentationController?.sourceView = self.tableView
+        alert.popoverPresentationController?.permittedArrowDirections = [.Up, .Down]
         
         let handler = {[weak self](action: UIAlertAction) -> Void in
             if let title = action.title {
@@ -352,9 +370,6 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alert.addAction(cancel)
-        
-        alert.popoverPresentationController?.sourceView = self.view
-        alert.popoverPresentationController?.sourceRect = self.view.bounds
         
         self.presentViewController(alert, animated: true, completion: nil)
         
