@@ -161,9 +161,8 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         if indexPath.section == 0 {
             if indexPath.row == 2 {
                 presentActionSheetForShowingAllEntries()
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
-        } else {
+        } else if (currentScoutingEntry!.selfEntry!.boolValue) {
             let attributeName = manger.attributes[indexPath.row]
             if indexPath.row == 1 {
                 performSegueWithIdentifier("editExtraNote", sender: self)
@@ -172,8 +171,8 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
             } else {
                 presentAlertControllerForIndexPath(indexPath, isStringInput: false)
             }
-            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -333,9 +332,16 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         let attributeName = manger.attributes[indexPath.row]
         let displayName = manger.displayNames[indexPath.row]
         let displayOptions: [String]
+        
         if var currentValue = self.currentScoutingEntry!.valueForKey(attributeName) as? String {
-            currentValue = "● \(currentValue)"
-            displayOptions = [currentValue] + options + ["Other"]
+            if let idx = options.indexOf(currentValue) {
+                var basicOptions = options
+                basicOptions[idx] = "● \(basicOptions[idx])"
+                displayOptions = basicOptions + ["Other"]
+            } else {
+                currentValue = "● \(currentValue)"
+                displayOptions = [currentValue] + options + ["Other"]
+            }
         } else {
             displayOptions = options + ["Other"]
         }
@@ -349,7 +355,13 @@ class TeamDetailViewController: UITableViewController, ScoutingEntryMangerDelega
         alert.popoverPresentationController?.permittedArrowDirections = [.Up, .Down]
         
         let handler = {[weak self](action: UIAlertAction) -> Void in
-            if let title = action.title {
+            if var title = action.title {
+                if title.hasPrefix("● ") {
+                    print(title)
+                    title.removeRange(title.startIndex...title.startIndex.successor())
+                    print(title)
+                }
+                
                 if title == "Other" {
                     self!.presentAlertControllerForIndexPath(indexPath, isStringInput: true)
                 } else {

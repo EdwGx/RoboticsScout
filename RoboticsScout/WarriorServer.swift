@@ -190,9 +190,9 @@ class WarriorServer {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             var params = WarriorServer.basicParams()
             
-            if let lastFetchedTeam = WarriorServer.lastFetched("ScoutingEntries") {
-                params["after"] = lastFetchedTeam
-            }
+//            if let lastFetchedTeam = WarriorServer.lastFetched("ScoutingEntries") {
+//                params["after"] = lastFetchedTeam
+//            }
             
             Alamofire.request(.GET, "https://4659warriors.com/scouting_entries.json", parameters: params).responseJSON(completionHandler: { (response) in
                 
@@ -213,13 +213,18 @@ class WarriorServer {
                     
                     for var entryJSON in scoutingEntryJSON {
                         do {
-                            let teamStatJSON = entryJSON["team_stat"] as! [String:AnyObject]
+                            let identifier = NSNumber(integer: (entryJSON["team_stat_id"] as! Int) )
                             
-                            let identifier = NSNumber(integer: (teamStatJSON["id"] as! Int) )
-                            
-                            if let teamStat = TeamStat.firstWithAttribute("identifier", value: identifier) as? TeamStat {
+                            if TeamStat.countWithAttribute("identifier", value: identifier) > 0 {
                                 let scoutingEntry = try GRTJSONSerialization.objectWithEntityName("ScoutingEntry", fromJSONDictionary: entryJSON, inContext: AERecord.defaultContext) as! ScoutingEntry
-                                scoutingEntry.teamStat = teamStat
+                                
+                                scoutingEntry.newEntry = NSNumber(bool: false)
+                                scoutingEntry.selfEntry = NSNumber(bool: false)
+                                scoutingEntry.changed = NSNumber(bool: false)
+                                
+                                if ((entryJSON["member_id"] as! Int) ==  remoteID()) {
+                                   scoutingEntry.selfEntry = NSNumber(bool: true)
+                                }
                                 
                                 scoutingEntry.teamStat!.updateAverageRating()
                             }

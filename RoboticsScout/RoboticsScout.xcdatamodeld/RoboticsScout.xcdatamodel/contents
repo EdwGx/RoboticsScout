@@ -132,7 +132,7 @@
             </userInfo>
         </attribute>
         <attribute name="newEntry" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <attribute name="preloadsCapacity" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="preloadsCapacity" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="preloads_capacity"/>
             </userInfo>
@@ -170,7 +170,7 @@
         </attribute>
         <relationship name="teamStat" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStat" inverseName="scoutingEntries" inverseEntity="TeamStat" syncable="YES">
             <userInfo>
-                <entry key="JSONKeyPath" value="team_stat"/>
+                <entry key="JSONKeyPath" value="team_stat_id"/>
             </userInfo>
         </relationship>
         <userInfo>

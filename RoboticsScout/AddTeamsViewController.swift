@@ -91,7 +91,13 @@ class AddTeamsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                     succeed = response.result.isSuccess
                 }
             }
-            
+//            succeed = true
+//            let teamNumbers = ["2Z", "24B", "39", "64", "82M", "169A", "180", "217D", "241N", "288A", "333T", "359A", "400X", "563", "590", "675C", "750W", "889E", "973G", "1028A", "1064P", "1104V", "1138", "1233C", "1344", "1366", "1460A", "1497K", "1575C", "1670A", "1879B", "2011B", "2105C", "2131W", "2335", "2442C", "2576A", "2616F", "2886A", "2941A", "3273B", "3309A", "3396", "3815J", "3946E", "4029A", "4146V", "4194E", "4334A", "4478C", "4659D", "4815A", "4828S", "5062A", "5107C", "5221B", "5327C", "5454B", "5482C", "5689A", "5772C", "5776Z", "5937A", "6023S", "6106A", "6135K", "6272B", "6430B", "6659", "6740B", "6891", "7001D", "7121", "7232Z", "7439", "7612", "7682E", "7853", "7882B", "7972D", "8000D", "8059D", "8176A", "8430", "8585D", "8659G", "8739A", "8787C", "8900", "9020", "9090C", "9282", "9421", "9541", "9708", "9898C", "9964S", "32016A", "99153K", "99679J"]
+//            var teams = [AnyObject]()
+//            for number in teamNumbers {
+//                teams.append(["number":number, "team_name":number, "robot_score":0, "robot_rank":5000, "programming_score":0, "programming_rank":5000, "country":"N/A", "city":"N/A", "region":"N/A", "division_name":"Engineering", "actual_order":0])
+//            }
+//            let result :[String:AnyObject] = ["teams": teams]
             if succeed {
                 let result = response.result.value as! [String:AnyObject]
                 
@@ -126,7 +132,7 @@ class AddTeamsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             if succeed {
                 self.createTeamsFromResponse(response.result.value as! [AnyObject])
             } else {
-                let teamJSON = ["number":number, "team_name":number, "robot_score":0, "robot_rank":5000, "programming_score":0, "programming_rank":5000, "country":"N/A", "city":"N/A", "region":"N/A", "divison_name":"N/A", "actual_order":0]
+                let teamJSON = ["number":number, "team_name":number, "robot_score":0, "robot_rank":5000, "programming_score":0, "programming_rank":5000, "country":"N/A", "city":"N/A", "region":"N/A", "division_name":"N/A", "actual_order":0]
                 self.createTeamsFromResponse([teamJSON])
             }
             

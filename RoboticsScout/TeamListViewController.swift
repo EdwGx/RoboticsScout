@@ -30,11 +30,8 @@ class TeamListViewController: CoreDataTableViewController, UISearchBarDelegate {
                 cell.nameLabel.text = object.teamName
                 
                 cell.divisionName = object.divisionName
-                if object.scoutingEntries != nil {
-                    cell.numberOfEntries = object.scoutingEntries!.count
-                } else {
-                    cell.numberOfEntries = 0
-                }
+                
+                cell.numberOfEntries = ScoutingEntry.countWithAttributes(["teamStat":object, "newEntry":false])
                 
                 cell.hasOwnEntry = object.hasSelfEntry!.boolValue
                 
@@ -95,14 +92,19 @@ class TeamListViewController: CoreDataTableViewController, UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
+        switch searchText.lowercaseString {
+        case "":
             setFetchRequest(nil)
-        } else if searchText == "0" {
-            //Load all empty entry
-        } else {
-            let predicate = NSPredicate(format: "(number CONTAINS[cd] %@) OR (divisionName CONTAINS[cd] %@) OR (teamName CONTAINS[cd] %@)", searchText, searchText, searchText)
+        case "rating":
+            let containsPredicate = NSPredicate(format: "averageRating != nil")
+            let sortDescriptors = [NSSortDescriptor(key: "averageRating", ascending: false)]
+            let request = TeamStat.createFetchRequest(predicate: containsPredicate, sortDescriptors: sortDescriptors)
+            
+            setFetchRequest(request)
+        default:
+            let containsPredicate = NSPredicate(format: "(number CONTAINS[cd] %@) OR (divisionName CONTAINS[cd] %@) OR (teamName CONTAINS[cd] %@)", searchText, searchText, searchText)
             let sortDescriptors = [NSSortDescriptor(key: "actualOrder", ascending: true)]
-            let request = TeamStat.createFetchRequest(predicate: predicate, sortDescriptors: sortDescriptors)
+            let request = TeamStat.createFetchRequest(predicate: containsPredicate, sortDescriptors: sortDescriptors)
             
             setFetchRequest(request)
         }

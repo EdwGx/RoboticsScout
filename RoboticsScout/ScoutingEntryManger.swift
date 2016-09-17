@@ -74,16 +74,14 @@ class ScoutingEntryManger: NSObject {
         "liftElevation":["High", "Low"],
         "liftWorks":["Yes", "No"],
         
-        "driverConsistency":["Prefect", "Good", "Normal", "Bad"],
+        "driverConsistency":["Perfect", "Good", "Normal", "Bad"],
         "driverIntelligence":["Jesus", "Smart", "Okay", "Bad"],
         
-        "preloadsCapacity":[],
-        
-        "shooterConsistency":["Prefect", "Good", "Normal", "Bad"],
+        "shooterConsistency":["Perfect", "Good", "Normal", "Bad"],
         "shooterRange":["Long", "Mid", "Close", "Mix"],
         
         "autonomousStrategy":["Field", "Preload", "Mix", "None"],
-        "autonomousReliability":["Prefect", "Good", "Normal", "Bad"],
+        "autonomousReliability":["Perfect", "Good", "Normal", "Bad"],
         
         "driveStalling":["High", "Low"],
         "connectionIssues":["Yes", "No"]
